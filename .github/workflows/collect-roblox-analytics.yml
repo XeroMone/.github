@@ -18,10 +18,26 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
+      - name: Check configuration
+        id: config
+        env:
+          ROBLOX_OPEN_CLOUD_API_KEY: ${{ secrets.ROBLOX_OPEN_CLOUD_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        shell: bash
+        run: |
+          if [[ -n "$ROBLOX_OPEN_CLOUD_API_KEY" && -n "$GOOGLE_SERVICE_ACCOUNT_JSON" ]]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "Collector is not configured yet. Add ROBLOX_OPEN_CLOUD_API_KEY and GOOGLE_SERVICE_ACCOUNT_JSON repository secrets."
+          fi
+
       - name: Check out repository
+        if: steps.config.outputs.configured == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python
+        if: steps.config.outputs.configured == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -29,9 +45,11 @@ jobs:
           cache-dependency-path: analytics/requirements.txt
 
       - name: Install dependencies
+        if: steps.config.outputs.configured == 'true'
         run: pip install -r analytics/requirements.txt
 
       - name: Collect analytics
+        if: steps.config.outputs.configured == 'true'
         env:
           ROBLOX_OPEN_CLOUD_API_KEY: ${{ secrets.ROBLOX_OPEN_CLOUD_API_KEY }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
