@@ -1,6 +1,6 @@
 <div align="center">
 
-# XeroMone
+# XeroMoney
 
 ### We make Roblox games.
 
@@ -12,9 +12,9 @@ Gameplay-first experiences built around simple ideas, strong replayability, and 
 
 ---
 
-## About XeroMone
+## About XeroMoney
 
-XeroMone is a small Roblox game studio focused on turning ideas into playable experiences quickly, then improving them through real player feedback.
+XeroMoney is a small Roblox game studio focused on turning ideas into playable experiences quickly, then improving them through real player feedback.
 
 We care about games that are easy to understand, fun to replay, and polished where it matters.
 
@@ -57,6 +57,6 @@ We experiment often, keep what works, and move on quickly from what does not.
 
 ### Build. Playtest. Ship. Improve.
 
-**XeroMone** · Roblox game studio
+**XeroMoney** · Roblox game studio
 
 </div>
